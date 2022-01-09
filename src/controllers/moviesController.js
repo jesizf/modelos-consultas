@@ -22,4 +22,15 @@ module.exports={
             })
             .catch(error => console.log(error))
     },
+    new : (req,res)=>{
+    db.Movie.findAll({
+        order: [
+            ["release_date", "DESC"]
+    ],
+    limit:5
+    }) .then(movies=>{
+        //res.send(movies)
+        return res.render('newestMovies',{movies})
+    }) .catch(error => console.log(error))
+    }
 }
