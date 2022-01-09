@@ -32,5 +32,28 @@ module.exports={
         //res.send(movies)
         return res.render('newestMovies',{movies})
     }) .catch(error => console.log(error))
+    },
+
+    recommended : (req,res) => {
+        db.Movie.findAll({
+            where : {
+                rating :{
+                    [Op.gte] : 9
+                },
+                awards :{
+                    [Op.gt] : 5
+                }
+            },
+            order :[
+                ['rating', 'DESC']
+            ]
+        })
+        .then(movies =>{
+            /* res.render(movies) */
+            return res.render('recommendedMovies',{
+                movies
+            })
+        })
+        .catch(error => console.log(error))
     }
 }
