@@ -9,4 +9,11 @@ module.exports = {
         });
       })
       .catch((error) => console.log(error));
-  },}
+  },
+detail: (req,res)=>{
+    db.Genre.findByPk(req.params.id)
+    .then((genres)=>{
+        return res.render("genresDetail",{genres})
+    }).catch((error)=>console.log(error))
+}
+}
